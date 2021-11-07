@@ -22,13 +22,21 @@ spring:
   jpa:
     open-in-view: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+      #create : 실행될때 마다 테이블을 새로 만듦 (데이터가 날아감)
+      #update : 데이터 누적 가능
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        #class에 선언된 변수명을 그대로 DB에 만들어준다는 의미
+        #org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        # -> 변수명을 스네이크표기법으로 DB에 만들어줌 (ex 변수명: myEmail -> my_email)
       use-new-id-generator-mappings: false
+      # 시퀀스를 어떻게 할지 정하는 옵션이며, true는 JPA가 사용하는 기본 넘버링 전략을 따라간다는 의미
     show-sql: true
+    #해당 옵션으로 hibernate에서 SQL 쿼리가 보이는 것
     properties:
       hibernate.format_sql: true
+      #원래는 쿼리가 한줄로 쭉나오는데, 해당 옵션으로 포맷형식되어 보기좋게 출력됨
 
   jackson:
     serialization:
